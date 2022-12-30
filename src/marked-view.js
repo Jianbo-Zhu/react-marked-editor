@@ -25,7 +25,7 @@ class ReactMarkedView extends Component {
             renderer: renderer,
             silent: true
         }, markedOptions));
-        let html = marked(markdown);
+        let html = marked.parse(markdown);
         markdownClass = markdownClass ? markdownClass : 'markdown-body';
         let cls = combineClassName(className, markdownClass);
         return (
