@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./action-button.css";
 class ActionButton extends Component {
   render() {
@@ -20,7 +21,8 @@ class ActionButton extends Component {
           style={styles.btn} onClick={this.props.onClick}>
           {this.props.text
             ? <i className={`fa ${this.props.iconClass ? 'fa-' + this.props.iconClass : ''} text-btn`}>{this.props.text}</i>
-            : <i className={`fa ${this.props.iconClass ? 'fa-' + this.props.iconClass : ''}`}></i>}
+            : <FontAwesomeIcon icon={["fa", this.props.iconClass]} />}
+            
         </div>
       </div>
     );

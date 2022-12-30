@@ -95,11 +95,11 @@ class ToolBar extends Component {
           </div>
           <div className="btn-wrapper" style={styles.btnWrapper}>
             <ActionButton width={iconSize} height={iconSize} title="Image"
-              iconClass="picture-o" onClick={this.props.onItemClick.bind(this, 'image')} />
+              iconClass="image" onClick={this.props.onItemClick.bind(this, 'image')} />
           </div>
           <div className="btn-wrapper" style={styles.btnWrapper}>
             <ActionButton width={iconSize} height={iconSize} title="Code block"
-              iconClass="file-code-o" onClick={this.props.onItemClick.bind(this, 'code')} />
+              iconClass="file-code" onClick={this.props.onItemClick.bind(this, 'code')} />
           </div>
           <div className="btn-wrapper" style={styles.btnWrapper}>
             <ActionButton width={iconSize} height={iconSize} title="Table"
@@ -138,17 +138,6 @@ class ToolBar extends Component {
               iconClass="eye" onClick={this.props.onItemClick.bind(this, 'state-view')} />
           </div>
         </div>
-        <style jsx>{`
-					.toolbar {
-						box-sizing: border-box;
-						border-bottom: 1px solid #eee;
-						padding: 0px 10px;
-					}
-					.btn-wrapper {
-						display: inline-block;
-						vertical-align: middle;
-					}
-				`}</style>
       </div>
     );
   }

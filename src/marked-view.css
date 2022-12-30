@@ -789,3 +789,12 @@
 .hljs-strong {
   font-weight: bold;
 }
+.toolbar {
+    box-sizing: border-box;
+    border-bottom: 1px solid #eee;
+    padding: 0px 10px;
+}
+.btn-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+}

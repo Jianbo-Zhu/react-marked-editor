@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-
+import './action-separator.css';
 class ActionSeparator extends Component {
   render() {
     const styles = {
