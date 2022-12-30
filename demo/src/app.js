@@ -160,17 +160,6 @@ export default class App extends Component {
           onChange={this.handleMarkdownChange}
         // markedOptions={{ tokenizer }}
         />
-        <style jsx>{`
-					.wrapper {
-						margin: 50px 50px 0px 50px;
-					}
-				`}</style>
-        <style jsx global>{`
-				* {
-					margin: 0px;
-					padding: 0px;
-				}
-				`}</style>
       </div>
     );
   }

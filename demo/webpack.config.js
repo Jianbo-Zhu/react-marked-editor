@@ -32,12 +32,8 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.less$/,
+                test: /\.css$/,
                 loader: 'style-loader!css-loader!less-loader'
-            },
-            {
-                test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
-                loader: 'file-loader?name=[name].[ext]'
             }
         ]
     },

@@ -7,8 +7,7 @@
     // 转译 React 组件为 JavaScript 代码
   ],
   "plugins": [
-    "react-hot-loader/babel",
+    "react-hot-loader/babel"
     // 开启 React 代码的模块热替换(HMR)
-    "styled-jsx/babel"
   ]
 }

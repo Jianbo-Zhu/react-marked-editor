@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server --config demo/webpack.config.js",
-    "build": "rimraf lib && babel --no-babelrc src --out-dir lib --extensions .js --copy-files --presets=es2015,react --plugins=styled-jsx/babel",
+    "build": "rimraf lib && babel --no-babelrc src --out-dir lib --extensions .js --copy-files --presets=es2015,react",
     "prepublish": "npm run build"
   },
   "keywords": [
@@ -17,7 +17,7 @@
   "dependencies": {
     "@types/codemirror": "0.0.43",
     "codemirror": "5.25.0",
-    "highlight.js": "9.10.0",
+    "highlight.js": "^9.10.0",
     "lodash.debounce": "^4.0.8",
     "lodash.endswith": "^4.2.1",
     "lodash.startswith": "^4.2.1",
@@ -52,7 +52,6 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "rimraf": "^2.6.1",
     "style-loader": "^0.17.0",
-    "styled-jsx": "^1.0.10",
     "webpack": "^2.5.0",
     "webpack-dev-server": "^2.4.5"
   }

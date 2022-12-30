@@ -1,0 +1,21 @@
+.wrapper {
+  cursor: pointer;
+}
+.btn {
+  border-radius: 3px;
+  border: 1px solid transparent;
+  text-align: center;
+  color: #777;
+}
+.btn:hover {
+  border: 1px solid #eee;
+  background: #fafafa;
+}
+.btn-select {
+  border: 1px solid #eee;
+  background: #f0f0f0;
+}
+.text-btn {
+  font-weight: bold;
+}
+
