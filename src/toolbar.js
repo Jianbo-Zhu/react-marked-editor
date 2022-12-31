@@ -5,7 +5,7 @@ import ActionSeparator from './action-separator';
 
 class ToolBar extends Component {
   render() {
-    const iconSize = 30;
+    const iconSize = 20;
     const separatorHeight = 12;
     const separatorThickness = 1;
     const separatorPaddingHor = (this.props.height - separatorHeight) / 2;
@@ -14,7 +14,8 @@ class ToolBar extends Component {
         lineHeight: (this.props.height - 1) + 'px'
       },
       btnWrapper: {
-        padding: ((this.props.height - 1) - iconSize) / 2 + 'px'
+        // padding: ((this.props.height - 1) - iconSize) / 2 + 'px'
+        padding: 3 + 'px'
       },
       separator: {
         padding: `${separatorPaddingHor}px 5px ${separatorPaddingHor}px 7px`

@@ -265,7 +265,7 @@ export default class Replacer {
 	}
 
 	table() {
-		const table = '|   |   |\n|---|---|\n|   |   |';
+		const table = '|||:Header 1|:Header 2|:Header 3|:Header 4\n|| Row 1 .. |  |  |  \n|| Row 2 .. |  |  |  \n|| Row 3 .. |  |  |  \n|| Row 4 .. |  |  |  ';
 		this.editor.listSelections().forEach(selObj => {
 			let pos = selObj.head;
 			if (this.editor.getLine(pos.line) == '') {
