@@ -116,10 +116,9 @@ A text of \`markdown\`.
 console.log('this is javascript code');
 \`\`\`
 
-|||this is table| A | B |
-|---|---|---|
-|    hello    | 1 | 2 |
-|    world    | 3 | 4 |
+|||:this is table:| :A | B: |
+||    hello    | 1 | 2 |
+||    world    | 3 | 4 |
 
 #### EOF
 

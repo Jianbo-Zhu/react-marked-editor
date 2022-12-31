@@ -1,22 +1,25 @@
 /**
  * Helpers
  */
-export function splitCells(tableRow, count) {
+export function splitCells(tableRow, count, isrow = false) {
+
+  const temp = isrow ? tableRow.replace(/^ *\|\|/g, '') : tableRow;
+  // console.log('tableRow', tableRow);
   // ensure that every cell-delimiting pipe has a space
   // before it to distinguish it from an escaped pipe
-  const row = tableRow.replace(/\|/g, (match, offset, str) => {
-      let escaped = false,
-        curr = offset;
-      while (--curr >= 0 && str[curr] === '\\') escaped = !escaped;
-      if (escaped) {
-        // odd number of slashes means | is escaped
-        // so we leave it alone
-        return '|';
-      } else {
-        // add space before unescaped |
-        return ' |';
-      }
-    }),
+  const row = temp.replace(/\|/g, (match, offset, str) => {
+    let escaped = false,
+      curr = offset;
+    while (--curr >= 0 && str[curr] === '\\') escaped = !escaped;
+    if (escaped) {
+      // odd number of slashes means | is escaped
+      // so we leave it alone
+      return '|';
+    } else {
+      // add space before unescaped |
+      return ' |';
+    }
+  }),
     cells = row.split(/ \|/);
   let i = 0;
 
@@ -40,30 +43,32 @@ export function splitCells(tableRow, count) {
 
 export const tokenizer = {
   table(src) {
-    const regexp=new RegExp('^ *\\|\\|\\|([^\\n ].*\\|.*)\\n' // Header
-    + ' {0,3}(?:\\| *)?(:?-+:? *(?:\\| *:?-+:? *)*)(?:\\| *)?' // Align
-    + '(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)'); // Cells
+    const regexp = new RegExp('^ *\\|\\|\\|([^\\n ].*\\|.*)(?:\n((?: {0,3}\\|\\|(?! *\n|hr|heading|blockquote|code|fences|list|html).*(?:\n|$))*)\n*|$)');
+    // const regexp=new RegExp('^ *\\|\\|\\|([^\\n ].*\\|.*)\\n' // Header
+    // + ' {0,3}(?:\\| *)?(:?-+:? *(?:\\| *:?-+:? *)*)(?:\\| *)?' // Align
+    // + '(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)'); // Cells
     const cap = regexp.exec(src);
     if (cap) {
-      console.log("matches", cap);
       const item = {
         type: 'table',
-        header: splitCells(cap[1]).map(c => { return { text: c }; }),
-        align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
-        rows: cap[3] && cap[3].trim() ? cap[3].replace(/\n[ \t]*$/, '').split('\n') : []
+        header: splitCells(cap[1]).map(c => {
+          return { text: c.replace(/^:/g, '').replace(/:$/g, '') };
+        }),
+        align: splitCells(cap[1]),
+        rows: cap[2] && cap[2].trim() ? cap[2].replace(/\n[ \t]*$/, '').split('\n') : []
       };
-      console.log("item", item);
       if (item.header.length === item.align.length) {
         item.raw = cap[0];
 
         let l = item.align.length;
         let i, j, k, row;
         for (i = 0; i < l; i++) {
-          if (/^ *-+: *$/.test(item.align[i])) {
-            item.align[i] = 'right';
-          } else if (/^ *:-+: *$/.test(item.align[i])) {
+          console.log('item.align[i]', item.align[i]);
+          if (/^ *:.+: *$/.test(item.align[i])) {
             item.align[i] = 'center';
-          } else if (/^ *:-+ *$/.test(item.align[i])) {
+          } else if (/^ *.+: *$/.test(item.align[i])) {
+            item.align[i] = 'right';
+          } else if (/^ *:.+ *$/.test(item.align[i])) {
             item.align[i] = 'left';
           } else {
             item.align[i] = null;
@@ -72,7 +77,7 @@ export const tokenizer = {
 
         l = item.rows.length;
         for (i = 0; i < l; i++) {
-          item.rows[i] = splitCells(item.rows[i], item.header.length).map(c => { return { text: c }; });
+          item.rows[i] = splitCells(item.rows[i], item.header.length, true).map(c => { return { text: c }; });
         }
 
         // parse child tokens inside headers and cells

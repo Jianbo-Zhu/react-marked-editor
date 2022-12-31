@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import marked from 'marked';
+import { marked } from 'marked';
 import highlight from 'highlight.js';
 import specialRenderer from './util/special-renderer';
 import { tokenizer } from './helpers'
