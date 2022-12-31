@@ -1,6 +1,16 @@
+.editor-box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.toolbar {
+  flex: 0 1 auto;
+}
+
 .outer-wrapper {
   box-sizing: border-box;
-  height: 100%;
+  flex: 1 1 auto;
 }
 .blockLeft {
   box-sizing: border-box;
