@@ -1,5 +1,6 @@
-.wrapper {
+.outer-wrapper {
   box-sizing: border-box;
+  height: 100%;
 }
 .blockLeft {
   box-sizing: border-box;

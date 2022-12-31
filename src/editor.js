@@ -121,7 +121,7 @@ class ReactMarkedEditor extends Component {
             customButtons={toolbarCustomButtons}
             onItemClick={this.handleToolbarAction.bind(this)} />
           : null}
-        <div className="wrapper" style={styles.wrapper}>
+        <div className="outer-wrapper" style={styles.wrapper}>
           <div className={editorClass}>
             <textarea ref="mdEditor" hidden></textarea>
           </div>
