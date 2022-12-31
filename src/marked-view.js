@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import marked from 'marked';
 import highlight from 'highlight.js';
 import specialRenderer from './util/special-renderer';
+import { tokenizer } from './helpers'
 import "./marked-view.css";
 class ReactMarkedView extends Component {
     constructor(props) {
@@ -25,6 +26,8 @@ class ReactMarkedView extends Component {
             renderer: renderer,
             silent: true
         }, markedOptions));
+        marked.use({ tokenizer: tokenizer });
+
         let html = marked.parse(markdown);
         markdownClass = markdownClass ? markdownClass : 'markdown-body';
         let cls = combineClassName(className, markdownClass);

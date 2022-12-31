@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import throttle from 'lodash.throttle';
 import ReactMarkedEditor, { Replacer } from '../../src/';
-import marked from "marked";
-import {
-  rtrim,
-  splitCells,
-  escape,
-  findClosingBracket
-} from './helpers.js';
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -90,67 +83,6 @@ export default class App extends Component {
       }
     };
     
-    const tokenizer = {
-      table(src) {
-        const regexp=new RegExp('^ *\\|\\|\\|([^\\n ].*\\|.*)\\n' // Header
-        + ' {0,3}(?:\\| *)?(:?-+:? *(?:\\| *:?-+:? *)*)(?:\\| *)?' // Align
-        + '(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)'); // Cells
-        const cap = regexp.exec(src);
-        if (cap) {
-          console.log("matches", cap);
-          const item = {
-            type: 'table',
-            header: splitCells(cap[1]).map(c => { return { text: c }; }),
-            align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
-            rows: cap[3] && cap[3].trim() ? cap[3].replace(/\n[ \t]*$/, '').split('\n') : []
-          };
-          console.log("item", item);
-          if (item.header.length === item.align.length) {
-            item.raw = cap[0];
-
-            let l = item.align.length;
-            let i, j, k, row;
-            for (i = 0; i < l; i++) {
-              if (/^ *-+: *$/.test(item.align[i])) {
-                item.align[i] = 'right';
-              } else if (/^ *:-+: *$/.test(item.align[i])) {
-                item.align[i] = 'center';
-              } else if (/^ *:-+ *$/.test(item.align[i])) {
-                item.align[i] = 'left';
-              } else {
-                item.align[i] = null;
-              }
-            }
-
-            l = item.rows.length;
-            for (i = 0; i < l; i++) {
-              item.rows[i] = splitCells(item.rows[i], item.header.length).map(c => { return { text: c }; });
-            }
-
-            // parse child tokens inside headers and cells
-
-            // header child tokens
-            l = item.header.length;
-            for (j = 0; j < l; j++) {
-              item.header[j].tokens = this.lexer.inline(item.header[j].text);
-            }
-
-            // cell child tokens
-            l = item.rows.length;
-            for (j = 0; j < l; j++) {
-              row = item.rows[j];
-              for (k = 0; k < row.length; k++) {
-                row[k].tokens = this.lexer.inline(row[k].text);
-              }
-            }
-            console.log("return item:", item);
-            return item;
-          }
-        }
-      }
-    }
-
-    marked.use({ tokenizer: tokenizer });
     return (
       <div className="wrapper">
         <ReactMarkedEditor style={styles.wrapper}
