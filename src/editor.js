@@ -113,16 +113,15 @@ class ReactMarkedEditor extends Component {
       btn._onClick = this.handleCustomButtonClick.bind(this, btn.onClick);
     }
     return (
-      <div style={this.props.style} className={'editor-box ' + this.props.className}>
+      <div className="editor-box">
         {!hideToolbar
-          ? <ToolBar
-            className="toolbar"
+          ? <div className="editor-toolbar"><ToolBar
             height={40}
             showType={this.state.showType}
             customButtons={toolbarCustomButtons}
-            onItemClick={this.handleToolbarAction.bind(this)} />
+            onItemClick={this.handleToolbarAction.bind(this)} /></div>
           : null}
-        <div className="outer-wrapper" style={styles.wrapper}>
+        <div className="outer-wrapper">
           <div className={editorClass}>
             <textarea ref="mdEditor" hidden></textarea>
           </div>
